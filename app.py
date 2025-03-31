@@ -1,5 +1,5 @@
 # 프레임워크 로드 
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect, session
 import pandas as pd
 import invest
 from database import MyDB
@@ -13,6 +13,8 @@ load_dotenv()
 # Flask Class 생성 
 app = Flask(__name__)
 
+
+app.secret_key = os.getenv('secret')
 # database Class 생성 
 mydb = MyDB(
     host = os.getenv('host'), 
@@ -36,7 +38,24 @@ def signup():
     return render_template('signup.html')
 
 # 로그인 api
-
+@app.route('/signin', methods=['post'])
+def signin():
+    input_id = request.form['id']
+    input_pass = request.form['password']
+    
+    login_result = mydb.execute_query(
+        querys.login_query,
+        input_id,
+        input_pass
+    )
+    
+    if len(login_result) == 1:
+        session['user_info'] = [input_id, input_pass]
+        return redirect('/invest')
+    else:
+        return redirect('/')
+    
+    
 # 회원 가입 api 
 @app.route('/signup2', methods=['post'])
 def signup2():
