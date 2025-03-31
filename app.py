@@ -2,10 +2,15 @@
 from flask import Flask, request, render_template, url_for
 import pandas as pd
 import invest
+from database import MyDB
 
 
 # Flask Class 생성 
 app = Flask(__name__)
+
+mydb = MyDB(
+    
+)
 
 # 유저가 어떤 종목, 투자기간, 투자 전략 방식을 입력할수 있는 
 # 페이지를 보여주는 api 생성
