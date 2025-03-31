@@ -10,7 +10,7 @@ app = Flask(__name__)
 # 유저가 어떤 종목, 투자기간, 투자 전략 방식을 입력할수 있는 
 # 페이지를 보여주는 api 생성
 @app.route('/invest')
-def invest():
+def first():
     return render_template('invest.html')
 
 
@@ -60,7 +60,7 @@ def dashboard():
     x_data =  list(result['시간'])
     # y축 데이터 
     y_data = list(result['일별 수익율'])
-    y1_data = list(result['누적 수익율율'])
+    y1_data = list(result['누적 수익율'])
     return render_template('dashboard.html', 
                             table_cols = cols_list, 
                             table_data = dict_data, 
