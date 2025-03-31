@@ -82,6 +82,10 @@ def signup2():
 # 페이지를 보여주는 api 생성
 @app.route('/invest')
 def first():
+    if 'user_info' in session:
+        return render_template['code']
+    else:
+        return redirect('/')
     return render_template('invest.html')
 
 
@@ -93,6 +97,8 @@ def first():
 # y_data (탸츠에서 y축 데이터) list
 @app.route('/dashboard')
 def dashboard():
+    if 'user_info' not in session:
+        return redirect('/')
     # 유저가 보낸 데이터를 변수에 저장 
     # get 방식으로 보내온 데이터는 request.args에 존재 
     # 종목코드 
