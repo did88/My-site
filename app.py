@@ -1,6 +1,7 @@
 # 프레임워크 로드 
 from flask import Flask, request, render_template, url_for
 import pandas as pd
+import invest
 
 
 # Flask Class 생성 
@@ -27,6 +28,29 @@ def dashboard():
     input_day = request.args['day']
     input_time = f"{input_year}-{input_month}-{input_day}"
     input_type = request.args['type']
+    df = invest.load_data(input_code, input_time)
+    invast_class = invest.Invest(df,
+                                 _col = 'Close',
+                                 _start = input_time)
+    if input_type == 'bnh':
+        result = invest_class.buyandhold()
+    elif input_type == 'boll':
+        result = invest_class.bollinger()
+    elif input_type == 'mmt':
+        result = invest_class.momentum()
+        
+    result.reset_index(inplace = True)
+    result = result[['Date', 'Close', 'trade', 'rtn', 'acc_rtn']]
+    
+    
+    cols_list = list(result.columns)
+    dict_data = result.to_dict(orient = 'records')
+    
+    x_data = list(result['시간'])
+    y_data = list(result['일별수익율'])
+    
+        
+        
     return render_template('dashboard.html')
 
 
