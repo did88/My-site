@@ -46,12 +46,11 @@ def dashboard():
         result = invest_class.bollinger()
     elif input_type == 'mmt':
         result = invest_class.momentum()
-    # 인덱스를 초기화
-    result.reset_index(inplace=True)
-    # 특정 컬럼만 필터
-    result = result[['Date', 'Close','trade', 'rtn', 'acc_rtn']]
     
-    result['ym'] = result['Date'].dt.strftime('%Y-%m')
+    # 특정 컬럼만 필터
+    result = result[['Close','trade', 'rtn', 'acc_rtn']]
+    
+    result['ym'] = result.index.strftime('%Y-%m')
     
     result = pd.concat(
         [
