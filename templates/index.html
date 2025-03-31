@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 종목을 선택하는 입력창 -->
+     <form action="/dashboard" method="get">
+        <select name="ticker">
+            <action value = "AAPL">AAPL</action>
+            <action value = "AMZN">AMZN</action>
+            <action value = "MSFT">MSFT</action>
+        </select>
+
+     </form>
+    <button onclick="location.href='/dashboard'">
+        대시보드로 이동
+    </button>
+</body>
+</html>
