@@ -83,10 +83,10 @@ def signup2():
 @app.route('/invest')
 def first():
     if 'user_info' in session:
-        return render_template['code']
+        return render_template('invest.html')
     else:
         return redirect('/')
-    return render_template('invest.html')
+    
 
 
 # 대쉬보드 페이지를 보여주는 api 생성 
